@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <PackageId>PageOfBob.Parsing</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Bob Davidson</Authors>
+    <Description>Tiny library for writing parsers in C#</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <Copyright>Copyright 2017 (c) Bob Davidson. All rights reserved.</Copyright>
+    <PackageTags>parse parsing</PackageTags>
+  </PropertyGroup>
+</Project>
