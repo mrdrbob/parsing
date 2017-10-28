@@ -3,13 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageId>PageOfBob.Parsing</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>Bob Davidson</Authors>
     <Description>Tiny library for writing parsers in C#</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>
+Added ListSource and EnumerableSource.
+Added ManyAsString rule to do the very common Many().JoinText() sequence in one step with a StringBuilder.
+Update Not rule to not require the inverted rule to have the same token and value type (for example, now Rule&lt;char, string&gt; can be inverted).
+Added Tokenize extension to help with tokenizing, lexing, and SAX-like parsers.
+    </PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Bob Davidson. All rights reserved.</Copyright>
     <PackageTags>parse parsing</PackageTags>
     <Version>1.0.1</Version>
+    <Authors>Bob Davidson</Authors>
+    <PackageProjectUrl>https://github.com/mrdrbob/PageOfBob.Backup</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mrdrbob/PageOfBob.Backup</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/mrdrbob/PageOfBob.Backup/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>parsing</PackageTags>
   </PropertyGroup>
 </Project>
