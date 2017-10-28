@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageId>PageOfBob.Parsing</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
+    <Version>1.0.2</Version>
     <Authors>Bob Davidson</Authors>
     <Description>Tiny library for writing parsers in C#</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -15,11 +16,10 @@ Added Tokenize extension to help with tokenizing, lexing, and SAX-like parsers.
     </PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Bob Davidson. All rights reserved.</Copyright>
     <PackageTags>parse parsing</PackageTags>
-    <Version>1.0.1</Version>
     <Authors>Bob Davidson</Authors>
-    <PackageProjectUrl>https://github.com/mrdrbob/PageOfBob.Backup</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mrdrbob/PageOfBob.Backup</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/mrdrbob/PageOfBob.Backup/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/mrdrbob/parsing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mrdrbob/parsing</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/mrdrbob/parsing/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>parsing</PackageTags>
   </PropertyGroup>
 </Project>
