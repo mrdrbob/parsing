@@ -123,6 +123,16 @@ var evenDigit = Match<char>(x => x == '2' || x == '4' || x == '6' || x == '8');
 var evenDigit = Any(Char('2'), Char('4'), Char('6'), Char('8'));
 ```
 
+Build-in Sources
+----------------
+
+An `ISource<T>` is an interface to a source of tokens that parsing rules will understand.  Below are the basic Source implementations provided:
+
+* `CharSource` - Accepts a string and returns `char` tokens.  If working with an entire string in memory, this is the one you want to use.
+* `ListSource<T>` - Accepts an `IList<T>` and returns `T` tokens.
+* `EnumerableSource<T>` - Accepts an `IEnumerable<T>` and returns `T` tokens.  Note: In order to support backtracking, this Source can potentially keep a reference to every token in the stream.  If possible, prefer a more specific source (such as `ListSource<T>` or `CharSource`).   This source is most appropriate when used with the `Tokenize` extension method (since `Tokenize` discards processed input as it yields tokens).
+* `StreamSource<byte>` - **Untested** - In theory, this works with a seekable stream and only buffers about 4K into memory at a time, but this is completely untested and may have terrible performance characteristics, weird side affects, or unfathomable bugs.  You have been warned.
+
 Basic Built-in Rules
 --------------------
 
@@ -157,6 +167,7 @@ These rules are in the `StringRules` static class:
 * `Rule<char, string> Text(string text, string message = null)` - Matches a string of text (case-sensitive).
 * `Rule<char, string> IText(string text, string message = null)` - Matches a string of text (case-insensitive).
 * `Rule<char, string> JoinText(this Rule<char, char[]> rule)` - Maps a char array result into a string.
+* `Rule<char, string> ManyAsString(this Rule<char, char> rule, bool required = false, string message = null)` - The same as `Many().JoinText()`, but uses a `StringBuilder` rather than an `IList<char>` and `string.Join`.
 
 Results
 -------
@@ -177,6 +188,9 @@ bool wasSuccess = results.Match(
   });
 ```
 
+Extension Methods
+-----------------
 
+* `IEnumerable<K> Tokenize<T, K>(this Rule<T, K> rule, ISource<T> source, bool throwOnFailure = true)` - Executes `rule` against `source` until out of input, yielding results.  If `rule` fails and `throwOnFailure` is true, it will throw a `FormatException.`  If `throwOnFailure` is false, it will stop yeilding results and ignore any remaining input.  This may be useful for building SAX-like lexers that parse fragments without building a complete object graph.
 
 

@@ -10,5 +10,6 @@
     <PackageReleaseNotes>First release</PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Bob Davidson. All rights reserved.</Copyright>
     <PackageTags>parse parsing</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 </Project>

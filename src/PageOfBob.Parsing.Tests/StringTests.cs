@@ -54,6 +54,33 @@ namespace PageOfBob.Parsing.Tests
         }
 
         [Fact]
+        public void ManyAsTextJoinsText()
+        {
+            var source = CharSource("aaa");
+            var rule = Char('a').ManyAsString();
+
+            rule(source).AssertEquals("aaa").AssertAtEnd();
+        }
+
+        [Fact]
+        public void ManyAsTextWorksWithNoMatch()
+        {
+            var source = CharSource("a");
+            var rule = Char('b').ManyAsString();
+
+            rule(source).AssertEquals("").AssertNotAtEnd();
+        }
+
+
+        [Fact]
+        public void ManyAsTextRequiresProperly()
+        {
+            var source = CharSource("a");
+            var rule = Char('b').ManyAsString(true);
+
+            rule(source).AssertFails();
+        }
+        [Fact]
         public void TextMatchesCaseSensitive()
         {
             var rule = Text("abc");

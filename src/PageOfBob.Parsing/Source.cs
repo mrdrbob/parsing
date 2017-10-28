@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PageOfBob.Parsing
 {
@@ -42,6 +43,25 @@ namespace PageOfBob.Parsing
             => position >= text.Length
                 ? (ISource<char>)Empty<char>.Instance
                 : new Source<char>(text[position], () => CharSource(text, position + 1));
+
+        public static ISource<T> ListSource<T>(IList<T> collection, int position = 0)
+            => position >= collection.Count
+                ? (ISource<T>)Empty<T>.Instance
+                : new Source<T>(collection[position], () => ListSource(collection, position + 1));
+
+        public static ISource<T> EnumerableSource<T>(IEnumerable<T> enumerable) => EnumeratorSource(enumerable.GetEnumerator());
+
+        static ISource<T> EnumeratorSource<T>(IEnumerator<T> enumerator)
+        {
+            if (!enumerator.MoveNext())
+                return Empty<T>.Instance;
+
+            T current = enumerator.Current;
+            ISource<T> nextCache = null;
+            return new Source<T>(current, () => nextCache ?? (nextCache = EnumeratorSource(enumerator)));
+        }
+
+
 
         public static ISource<byte> StreamSource(System.IO.Stream str)
             => _StreamSource(str, 0, 0, null, 0);

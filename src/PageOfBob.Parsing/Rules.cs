@@ -105,14 +105,15 @@ namespace PageOfBob.Parsing
                 return Result.Success(list.ToArray(), source);
             };
 
-        public static Rule<T, T> Not<T>(this Rule<T, T> rule, string message = null)
-            => source => source.Match(
+        public static Rule<T, T> Not<T, K>(this Rule<T, K> rule, string message = null) 
+            => (source) => source.Match(
                 () => Result.Fail<T>("EOF"),
                 nonempty => rule(nonempty).Match(
                     fail => Result.Success(nonempty.Token, nonempty.Next()),
                     success => Result.Fail<T>(message ?? "Rule matched")
                 )
             );
+
 
         public static Rule<T, K> Optional<T, K>(this Rule<T, K> rule, K defaultValue)
             => source => rule(source).Match(

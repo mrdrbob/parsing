@@ -3,6 +3,7 @@ using System.Linq;
 using Xunit;
 using static PageOfBob.Parsing.Rules;
 using static PageOfBob.Parsing.Sources;
+using static PageOfBob.Parsing.StringRules;
 
 namespace PageOfBob.Parsing.Tests
 {
@@ -279,6 +280,18 @@ namespace PageOfBob.Parsing.Tests
 
             var next = rule(source).AssertEquals('a');
             next = rule(next).AssertEquals('b');
+            rule(next).AssertFails();
+        }
+
+        [Fact]
+        public void NotInvertsNonTokenRules()
+        {
+            var source = CharSource("abcxyz");
+            var rule = Text("xyz").Not();
+
+            var next = rule(source).AssertEquals('a');
+            next = rule(next).AssertEquals('b');
+            next = rule(next).AssertEquals('c');
             rule(next).AssertFails();
         }
 
