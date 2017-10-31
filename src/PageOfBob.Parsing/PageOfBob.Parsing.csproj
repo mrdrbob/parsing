@@ -9,10 +9,8 @@
     <Description>Tiny library for writing parsers in C#</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>
-Added ListSource and EnumerableSource.
-Added ManyAsString rule to do the very common Many().JoinText() sequence in one step with a StringBuilder.
-Update Not rule to not require the inverted rule to have the same token and value type (for example, now Rule&lt;char, string&gt; can be inverted).
-Added Tokenize extension to help with tokenizing, lexing, and SAX-like parsers.
+Added ability to get current position in the stream
+(if the stream supports it)
     </PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Bob Davidson. All rights reserved.</Copyright>
     <PackageTags>parse parsing</PackageTags>
