@@ -9,11 +9,19 @@ namespace PageOfBob.Parsing
     {
         public static Rule<T, T> Match<T>(Func<T, bool> match, string message = null) 
             => (source) => source.Match(
-                () => new Failure<T, T>("EOF"),
+                empty => new Failure<T, T>("EOF"),
                 content => match(content.Token)
                         ? Result.Success(content.Token, content.Next())
                         : Result.Fail<T>(message)
             );
+
+        public static Rule<T, K> GetPosition<T, K>(Func<long, K> map)
+            => (source) => source.Match(
+                empty => Result.Success(map(empty.Position), source),
+                content => Result.Success(map(content.Position), source)
+            );
+
+        public static Rule<T, long> GetPosition<T>() => GetPosition<T, long>(x => x);
 
         public static Rule<T, T> Any<T>() => Match<T>(x => true);
 
@@ -107,7 +115,7 @@ namespace PageOfBob.Parsing
 
         public static Rule<T, T> Not<T, K>(this Rule<T, K> rule, string message = null) 
             => (source) => source.Match(
-                () => Result.Fail<T>("EOF"),
+                empty => Result.Fail<T>("EOF"),
                 nonempty => rule(nonempty).Match(
                     fail => Result.Success(nonempty.Token, nonempty.Next()),
                     success => Result.Fail<T>(message ?? "Rule matched")
@@ -131,7 +139,7 @@ namespace PageOfBob.Parsing
             => source => rule.Invoke(source).Match(
                 fail => fail,
                 success => success.Next.Match(
-                    () => success,
+                    empty => success,
                     hasContent => Result.Fail<T, K>("Expected EOF")
                 )
             );

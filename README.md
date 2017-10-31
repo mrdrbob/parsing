@@ -59,7 +59,7 @@ Rules
 
 Parsers are built from simple rules.  The **parser rule** is a method that takes a token source (`ISource<TToken>`) and returns a result (`IResult<TToken, TOutput>`).  In general, rules should be pure functions.
 
-A **token source** can either be empty (`Empty<TToken>`) or non-emtpy (`Source<TToken>`).  A non-empty source contains a single token (`TToken Token { get; }`) and a method to get the next token from the stream (`ISource<TToken> Next() `).
+A **token source** can either be empty (`Empty<TToken>`) or non-empty (`Source<TToken>`).  A non-empty source contains a single token (`TToken Token { get; }`), a method to get the next token from the stream (`ISource<TToken> Next() `), and the current position (`long Position { get }`) in the stream (for some streams this may not be applicable).  An empty source will only contain the position (`long Position { get }`), which should be equal to the length of the stream, if the stream has a length.
 
 A **result** (`IResult<TToken, TOutput>`) can either be a failure (`Failure<TToken, TValue>`) which contains only an error message (`string Message { get; }`) or a success (`Success<TToken, TValue>`) which contains a parsed value (`TValue Value { get; }`) and the next token source from the stream (`ISource<TToken> Next { get; }`).
 

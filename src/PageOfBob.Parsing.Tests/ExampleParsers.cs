@@ -54,7 +54,7 @@ namespace PageOfBob.Parsing.Tests
         public static Rule<char, char> BetterEvenDigit()
             => (input) =>
                 input.Match(
-                    () => Result.Fail<char>("Input is empty"),
+                    empty => Result.Fail<char>("Input is empty"),
                     source =>
                     {
                         if (source.Token != '2' && source.Token != '4' && source.Token != '6' && source.Token != '8')

@@ -7,7 +7,7 @@ namespace PageOfBob.Parsing.Tests
     {
         public static Source<TToken> Assume<TToken>(this ISource<TToken> source)
             => source.Match(
-                () => null,
+                e => null,
                 t => t
             );
 
@@ -19,13 +19,13 @@ namespace PageOfBob.Parsing.Tests
 
         public static void AssertAtEnd<TToken>(this ISource<TToken> source)
         {
-            bool isEof = source.Match(() => true, s => false);
+            bool isEof = source.Match(e => true, s => false);
             Assert.True(isEof);
         }
 
         public static void AssertNotAtEnd<TToken>(this ISource<TToken> source)
         {
-            bool isEof = source.Match(() => true, s => false);
+            bool isEof = source.Match(e => true, s => false);
             Assert.True(!isEof);
         }
 

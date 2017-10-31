@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using static PageOfBob.Parsing.Rules;
@@ -27,6 +28,27 @@ namespace PageOfBob.Parsing.Tests
             Assert.Equal('c', c.Token);
 
             c.Next().AssertAtEnd();
+        }
+
+        [Fact]
+        public void PositionTracksPosition()
+        {
+            var source = CharSource("abc");
+            var rule = GetPosition<char>().Then(IsLetter, (pos, ch) => new KeyValuePair<char, long>(ch, pos));
+
+            var a = rule(source).AssertEquals(new KeyValuePair<char, long>('a', 0));
+            var b = rule(a).AssertEquals(new KeyValuePair<char, long>('b', 1));
+            var c = rule(b).AssertEquals(new KeyValuePair<char, long>('c', 2));
+
+            c.AssertAtEnd();
+        }
+
+        [Fact]
+        public void PositionSucceedsAtEOF()
+        {
+            var source = CharSource("");
+            var rule = GetPosition<char>();
+            rule(source).AssertEquals(0);
         }
 
         [Fact]

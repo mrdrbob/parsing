@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <PackageId>PageOfBob.Parsing</PackageId>
-    <PackageVersion>1.0.2</PackageVersion>
-    <Version>1.0.2</Version>
+    <PackageVersion>1.0.3</PackageVersion>
+    <Version>1.0.3</Version>
     <Authors>Bob Davidson</Authors>
     <Description>Tiny library for writing parsers in C#</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
